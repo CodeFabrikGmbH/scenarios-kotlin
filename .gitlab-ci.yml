@@ -22,4 +22,5 @@ deploy:library:
   dependencies:
     - build:kotlin
   script:
-    - if [ -z $CI_COMMIT_TAG ]; then mvn -DdevelopmentVersion=develop-SNAPSHOT -DreleaseVersion=${CI_COMMIT_TAG} -Dresume=false release:prepare release:perform -P cf-nexus-base-url; fi
+    - echo $CI_COMMIT_TAG
+    - if [ -z $CI_COMMIT_TAG ]; then mvn -DdevelopmentVersion=develop-SNAPSHOT -DreleaseVersion=${CI_COMMIT_TAG} ${MAVEN_CLI_OPTS} -Dresume=false release:prepare release:perform -P cf-nexus-base-url; fi
