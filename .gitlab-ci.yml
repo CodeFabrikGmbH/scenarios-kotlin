@@ -1,3 +1,7 @@
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
 stages:
   - build
 
@@ -5,10 +9,8 @@ cache:
   paths:
     - .m2/repository/
 
-
 build:kotlin:
   stage: build
   image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
   script:
-    - mvn -f scenarios-kotlin/pom.xml clean install
-
+    - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS} clean install
