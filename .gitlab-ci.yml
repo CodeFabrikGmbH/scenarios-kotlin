@@ -4,6 +4,7 @@ variables:
 
 stages:
   - build
+  - deploy
 
 cache:
   paths:
@@ -14,3 +15,10 @@ build:kotlin:
   image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
   script:
     - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS} clean install
+
+deploy:library:
+  stage: deploy
+  dependencies:
+    - build:kotlin
+  script:
+    - if [ -z $CI_COMMIT_TAG ]; then mvn -DdevelopmentVersion=develop-SNAPSHOT -DreleaseVersion=${CI_COMMIT_TAG} -Dresume=false release:prepare release:perform -P cf-nexus-base-url; fi
