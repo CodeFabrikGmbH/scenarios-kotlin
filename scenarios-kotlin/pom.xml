@@ -13,6 +13,13 @@
         <version>1.0.5</version>
     </parent>
 
+    <scm>
+        <connection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</connection>
+        <developerConnection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+
     <properties>
         <kotlin.version>1.3.0</kotlin.version>
         <junit.version>4.12</junit.version>
