@@ -1,0 +1,14 @@
+stages:
+  - build
+
+cache:
+  paths:
+    - .m2/repository/
+
+
+build:kotlin:
+  stage: build
+  image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
+  script:
+    - mvn -f scenarios-kotlin/pom.xml clean install
+
