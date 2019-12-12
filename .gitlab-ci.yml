@@ -19,5 +19,7 @@ build:kotlin:
 deploy:kotlin:
   stage: deploy
   image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
+  only:
+    - tag
   script:
-    - if [ -n $CI_COMMIT_TAG ]; then mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS} -DdevelopmentVersion=develop-SNAPSHOT -DreleaseVersion=${CI_COMMIT_TAG} -Dresume=false release:prepare release:perform -P cf-nexus-base-url; fi
+    - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS} -DdevelopmentVersion=develop-SNAPSHOT -DreleaseVersion=${CI_COMMIT_TAG} -Dresume=false release:prepare release:perform -P cf-nexus-base-url;
