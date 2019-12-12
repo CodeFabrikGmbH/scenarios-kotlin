@@ -18,6 +18,7 @@ build:kotlin:
 
 deploy:library:
   stage: deploy
+  image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
   dependencies:
     - build:kotlin
   script:
