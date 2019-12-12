@@ -1,6 +1,6 @@
 variables:
-  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  MAVEN_CLI_OPTS: "-s ./scenarios-kotlin/.m2/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=./scenarios-kotlin/.m2/repository"
 
 stages:
   - build
@@ -8,7 +8,7 @@ stages:
 
 cache:
   paths:
-    - .m2/repository/
+    - ./scenarios-kotlin/.m2/repository/
 
 build:kotlin:
   stage: build
