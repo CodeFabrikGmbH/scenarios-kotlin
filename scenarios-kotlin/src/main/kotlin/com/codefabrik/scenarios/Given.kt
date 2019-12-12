@@ -2,33 +2,30 @@ package com.codefabrik.scenarios
 
 import kotlin.reflect.KClass
 
-fun <T : EmptyContext> given(
-    context: () -> T,
+fun <T : Scenario> given(
+    scenarioSupplier: () -> T,
     expected: KClass<*>? = null,
     afterScenario: () -> Unit = {},
-    configuration: Scenario<out T>.() -> Unit
+    executeSteps: T.() -> Unit
 ) {
-    val contextResult = runCatching(context)
-    contextResult.onFailure {
+    val scenarioResult = runCatching(scenarioSupplier)
+    scenarioResult.onFailure {
         afterScenario()
         throw AssertionError("Context is invalid.")
     }
 
-    val scenarioResult = contextResult.mapCatching { instance ->
-        val setup = Scenario(instance)
-        configuration.invoke(setup)
-    }
+    val stepsResult = scenarioResult.mapCatching(executeSteps)
 
     afterScenario()
 
     if (expected != null) {
-        scenarioResult.onSuccess {
+        stepsResult.onSuccess {
             throw AssertionError("Expected error $expected has not been thrown.")
         }
-        scenarioResult.onFailure {
+        stepsResult.onFailure {
             if (it::class == expected) null else throw it
         }
     } else {
-        scenarioResult.onFailure { throw it }
+        stepsResult.onFailure { throw it }
     }
 }
