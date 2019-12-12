@@ -16,11 +16,12 @@ build:kotlin:
   image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
   script:
     - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} clean install
+    - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} deploy
 
 deploy:kotlin:
   stage: deploy
   image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
-#  only:
-#    - tag
+  only:
+    - tag
   script:
     - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_DEPLOY} -DdevelopmentVersion=develop-SNAPSHOT -DreleaseVersion=${CI_COMMIT_TAG} -Dresume=false release:prepare release:perform -P cf-nexus-base-url;
