@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.codefabrik.scenarios</groupId>
     <artifactId>scenarios-kotlin</artifactId>
-    <version>develop-SNAPSHOT</version>
+    <version>test</version>
 
     <parent>
         <groupId>com.codefabrik</groupId>
@@ -16,7 +15,7 @@
     <scm>
         <connection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</connection>
         <developerConnection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>scenarios-kotlin-test</tag>
     </scm>
 
 
