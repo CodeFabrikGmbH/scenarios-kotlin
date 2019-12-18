@@ -4,7 +4,7 @@
 
     <groupId>com.codefabrik.scenarios</groupId>
     <artifactId>scenarios-kotlin</artifactId>
-    <version>develop-SNAPSHOT</version>
+    <version>test</version>
 
     <parent>
         <groupId>com.codefabrik</groupId>
@@ -15,7 +15,7 @@
     <scm>
         <connection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</connection>
         <developerConnection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>scenarios-kotlin-test</tag>
     </scm>
 
 
