@@ -24,4 +24,7 @@ deploy:kotlin:
   only:
     - tags
   script:
+    - git checkout -B master
     - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_DEPLOY} -DdevelopmentVersion=develop-SNAPSHOT -DreleaseVersion=${CI_COMMIT_TAG} -Dresume=false release:prepare release:perform -P cf-nexus-base-url;
+    - git tag -f -a ${CI_COMMIT_TAG}
+    - git push -f --tags
