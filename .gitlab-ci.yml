@@ -25,4 +25,4 @@ deploy:kotlin:
     - tags
   script:
     - mvn versions:set -DnewVersion=$CI_COMMIT_TAG
-    - mvn deploy
+    - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} deploy
