@@ -13,14 +13,14 @@ cache:
 
 build:kotlin:
   stage: build
-  image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
+  image: codefabrik/maven3.6-jdk10adopt
   script:
     - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} clean install
     - mvn -f scenarios-kotlin/pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} deploy
 
 deploy:kotlin:
   stage: deploy
-  image: docker.code-fabrik.com/codefabrik/containers/maven3.6-jdk10adopt
+  image: codefabrik/maven3.6-jdk10adopt
   only:
     - tags
   script:
