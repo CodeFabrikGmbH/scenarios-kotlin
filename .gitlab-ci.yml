@@ -15,8 +15,8 @@ build:kotlin:
   stage: build
   image: codefabrik/maven3.6-jdk10adopt
   script:
-    - mvn -f pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} clean install
-    - mvn -f pom.xml ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} deploy
+    - mvn ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} clean install
+    - mvn ${MAVEN_CLI_OPTS} ${MAVEN_OPTS_BUILD} deploy
 
 deploy:kotlin:
   stage: deploy

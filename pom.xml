@@ -6,12 +6,6 @@
     <artifactId>scenarios-kotlin</artifactId>
     <version>develop-SNAPSHOT</version>
 
-    <parent>
-        <groupId>com.codefabrik</groupId>
-        <artifactId>codefabrik-parent</artifactId>
-        <version>1.0.5</version>
-    </parent>
-
     <scm>
         <connection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</connection>
         <developerConnection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</developerConnection>
@@ -20,7 +14,7 @@
 
 
     <properties>
-        <kotlin.version>1.3.0</kotlin.version>
+        <kotlin.version>1.4.31</kotlin.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -28,6 +22,7 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
