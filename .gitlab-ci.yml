@@ -5,7 +5,6 @@ variables:
 
 stages:
   - build
-  - deploy
 
 cache:
   paths:
