@@ -2,14 +2,11 @@ package example
 
 import com.codefabrik.scenarios.Scenario
 import com.codefabrik.scenarios.given
-import example.application.OrganizationService
-import example.infrastructure.inmemory.InMemoryOrganizationRepository
 import org.junit.Assert
 import org.junit.Test
 
 
-
-class OrganizationCreatingTest: ExampleTest() {
+class OrganizationCreatingTest {
     @Test
     fun `creating an organization should work`() {
         given(::Scenario) {
@@ -20,11 +17,11 @@ class OrganizationCreatingTest: ExampleTest() {
 }
 
 private fun Scenario.`when the admin creates an organization`(organizationName: String) {
-    Application.organizationService.create(organizationName)
+    TestApplication.organizationService.create(organizationName)
 }
 
 private fun Scenario.`then the organization list should contain an organization`(organizationName: String) {
-    val list = Application.organizationService.list()
+    val list = TestApplication.organizationService.list()
     Assert.assertEquals(1, list.size)
     Assert.assertEquals(organizationName, list[0].name)
 }
