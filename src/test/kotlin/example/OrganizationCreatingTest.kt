@@ -2,7 +2,8 @@ package example
 
 import com.codefabrik.scenarios.Scenario
 import com.codefabrik.scenarios.given
-import org.junit.Assert
+import example.setup.`then the organization list should contain an organization`
+import example.setup.`when the admin creates an organization`
 import org.junit.Test
 
 
@@ -14,14 +15,4 @@ class OrganizationCreatingTest {
             `then the organization list should contain an organization`("Test")
         }
     }
-}
-
-private fun Scenario.`when the admin creates an organization`(organizationName: String) {
-    TestApplication.organizationService.create(organizationName)
-}
-
-private fun Scenario.`then the organization list should contain an organization`(organizationName: String) {
-    val list = TestApplication.organizationService.list()
-    Assert.assertEquals(1, list.size)
-    Assert.assertEquals(organizationName, list[0].name)
 }
