@@ -14,4 +14,8 @@ class InMemoryOrganizationRepository: OrganizationRepository {
     override fun list(): List<Organization> {
         return organizationById.values.toList();
     }
+
+    override fun find(organizationId: UUID): Organization? {
+        return organizationById[organizationId]
+    }
 }
