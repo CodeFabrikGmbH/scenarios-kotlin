@@ -15,4 +15,8 @@ class EmployeeService(
         organizationService.checkIfOrganizationExists(organizationId)
         return employeeRepository.save(Employee(name, organizationId))
     }
+
+    fun list(): List<Employee> {
+        return employeeRepository.list()
+    }
 }

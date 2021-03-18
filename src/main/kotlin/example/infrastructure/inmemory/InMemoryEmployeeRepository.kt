@@ -10,4 +10,8 @@ class InMemoryEmployeeRepository: EmployeeRepository {
         employeeById[employee.id] = employee
         return employee
     }
+
+    override fun list(): List<Employee> {
+        return employeeById.values.toList()
+    }
 }
