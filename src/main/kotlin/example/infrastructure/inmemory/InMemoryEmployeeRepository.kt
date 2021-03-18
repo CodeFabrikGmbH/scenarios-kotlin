@@ -14,4 +14,8 @@ class InMemoryEmployeeRepository: EmployeeRepository {
     override fun list(): List<Employee> {
         return employeeById.values.toList()
     }
+
+    fun clear() {
+        employeeById.clear()
+    }
 }

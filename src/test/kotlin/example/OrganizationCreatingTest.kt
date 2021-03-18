@@ -7,7 +7,7 @@ import example.setup.`when the admin creates an organization`
 import org.junit.Test
 
 
-class OrganizationCreatingTest {
+class OrganizationCreatingTest: BasicTest() {
     @Test
     fun `creating an organization should work`() {
         given(::Scenario) {

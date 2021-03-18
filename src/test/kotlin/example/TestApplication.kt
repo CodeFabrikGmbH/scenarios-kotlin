@@ -6,8 +6,13 @@ import example.infrastructure.inmemory.InMemoryEmployeeRepository
 import example.infrastructure.inmemory.InMemoryOrganizationRepository
 
 object TestApplication {
-    private val organizationRepository = InMemoryOrganizationRepository()
-    private val employeeRepository = InMemoryEmployeeRepository()
+    private var organizationRepository = InMemoryOrganizationRepository()
+    private var employeeRepository = InMemoryEmployeeRepository()
     val organizationService: OrganizationService = OrganizationService(organizationRepository)
     val employeeService: EmployeeService = EmployeeService(employeeRepository, organizationService)
+
+    fun cleanUp() {
+        organizationRepository.clear()
+        employeeRepository.clear()
+    }
 }

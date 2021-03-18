@@ -20,5 +20,4 @@ fun `test organization`.`then the employee should exist in the test organization
         Assert.assertEquals(testOrganization.id, it.organizationId)
         Assert.assertEquals(role, it.role)
     }
-
 }

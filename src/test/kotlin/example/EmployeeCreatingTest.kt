@@ -7,7 +7,7 @@ import example.setup.`then the employee should exist in the test organization`
 import example.setup.`when the admin creates an employee`
 import org.junit.Test
 
-class EmployeeCreatingTest {
+class EmployeeCreatingTest: BasicTest() {
     @Test
     fun `creating an employee should work`() {
         given(::`test organization`) {

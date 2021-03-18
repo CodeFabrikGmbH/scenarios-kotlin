@@ -6,6 +6,7 @@ import java.util.*
 
 class InMemoryOrganizationRepository: OrganizationRepository {
     private val organizationById: MutableMap<UUID, Organization> = mutableMapOf()
+
     override fun save(organization: Organization): Organization {
         organizationById[organization.id] = organization
         return organization
@@ -17,5 +18,9 @@ class InMemoryOrganizationRepository: OrganizationRepository {
 
     override fun find(organizationId: UUID): Organization? {
         return organizationById[organizationId]
+    }
+
+    fun clear() {
+        organizationById.clear()
     }
 }
