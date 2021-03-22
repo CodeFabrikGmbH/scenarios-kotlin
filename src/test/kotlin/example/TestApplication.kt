@@ -13,7 +13,7 @@ object TestApplication {
     private val leaveRepository = InMemoryLeaveRepository()
     val organizationService: OrganizationService = OrganizationService(organizationRepository)
     val employeeService: EmployeeService = EmployeeService(employeeRepository, organizationService)
-    val leaveService: LeaveService = LeaveService(leaveRepository)
+    val leaveService: LeaveService = LeaveService(leaveRepository, employeeRepository)
 
     fun cleanUp() {
         organizationRepository.clear()

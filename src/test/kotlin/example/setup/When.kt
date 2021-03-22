@@ -22,3 +22,7 @@ fun `test organization`.`when the admin creates an employee`(employeeName: Strin
 fun `organization with employees`.`when the employee requests a leave`(start: LocalDate, end: LocalDate, employee: Employee) {
     TestApplication.leaveService.request(start, end, employee)
 }
+
+fun `employee with pending leave`.`when a leave is accepted`(acceptorId: UUID) {
+    TestApplication.leaveService.accept(pendingLeave.id, acceptorId)
+}

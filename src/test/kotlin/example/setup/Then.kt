@@ -29,3 +29,9 @@ fun `organization with employees`.`then there should be a pending leave for the 
     Assert.assertEquals(1, list.size)
     Assert.assertEquals(LeaveStatus.PENDING, list[0].status)
 }
+
+fun `organization with employees`.`then there should be an accepted leave for the employee`() {
+    val list = TestApplication.leaveService.list(employee)
+    Assert.assertEquals(1, list.size)
+    Assert.assertEquals(LeaveStatus.ACCEPTED, list[0].status)
+}

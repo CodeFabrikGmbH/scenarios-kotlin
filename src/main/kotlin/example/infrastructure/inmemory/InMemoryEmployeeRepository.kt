@@ -15,6 +15,10 @@ class InMemoryEmployeeRepository: EmployeeRepository {
         return employeeById.values.toList()
     }
 
+    override fun find(employeeId: UUID): Employee? {
+        return employeeById[employeeId]
+    }
+
     fun clear() {
         employeeById.clear()
     }

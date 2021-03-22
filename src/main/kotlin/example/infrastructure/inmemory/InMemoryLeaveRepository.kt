@@ -16,6 +16,11 @@ class InMemoryLeaveRepository: LeaveRepository {
     override fun list(employee: Employee): List<Leave> {
         return leaveById.values.filter { it.employeeId == employee.id }
     }
+
+    override fun find(leaveId: UUID): Leave? {
+        return leaveById[leaveId]
+    }
+
     fun clear() {
         leaveById.clear()
     }
