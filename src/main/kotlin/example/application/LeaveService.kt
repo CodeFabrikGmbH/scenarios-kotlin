@@ -10,7 +10,7 @@ class LeaveService(
         private val leaveRepository: LeaveRepository
 ) {
 
-    fun create(start: LocalDate, end: LocalDate, employee: Employee): Leave {
+    fun request(start: LocalDate, end: LocalDate, employee: Employee): Leave {
         return leaveRepository.save(Leave.create(start, end, employee.id))
     }
 

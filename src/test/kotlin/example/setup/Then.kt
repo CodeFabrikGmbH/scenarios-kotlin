@@ -2,7 +2,9 @@ package example.setup
 
 import com.codefabrik.scenarios.Scenario
 import example.TestApplication
+import example.application.LeaveService
 import example.domain.model.employee.Role
+import example.domain.model.leave.LeaveStatus
 import org.junit.Assert
 
 fun Scenario.`then the organization list should contain an organization`(organizationName: String) {
@@ -22,7 +24,8 @@ fun `test organization`.`then the employee should exist in the test organization
     }
 }
 
-fun `organization with employees`.`then there should be a leave for the employee`() {
+fun `organization with employees`.`then there should be a pending leave for the employee`() {
     val list = TestApplication.leaveService.list(employee)
     Assert.assertEquals(1, list.size)
+    Assert.assertEquals(LeaveStatus.PENDING, list[0].status)
 }

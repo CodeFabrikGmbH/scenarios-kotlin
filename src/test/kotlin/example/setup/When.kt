@@ -19,6 +19,6 @@ fun `test organization`.`when the admin creates an employee`(employeeName: Strin
     TestApplication.employeeService.create(employeeName, testOrganization.id, role)
 }
 
-fun `organization with employees`.`when the employee creates a leave`(start: LocalDate, end: LocalDate, employee: Employee) {
-    TestApplication.leaveService.create(start, end, employee)
+fun `organization with employees`.`when the employee requests a leave`(start: LocalDate, end: LocalDate, employee: Employee) {
+    TestApplication.leaveService.request(start, end, employee)
 }
