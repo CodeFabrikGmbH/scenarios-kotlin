@@ -2,7 +2,6 @@ package example.setup
 
 import com.codefabrik.scenarios.Scenario
 import example.TestApplication
-import example.application.LeaveService
 import example.domain.model.employee.Role
 import example.domain.model.leave.LeaveStatus
 import org.junit.Assert

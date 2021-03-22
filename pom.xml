@@ -35,6 +35,16 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/example/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <configuration>
@@ -50,6 +60,7 @@
                         <configuration>
                             <sourceDirs>
                                 <source>src/main/kotlin</source>
+                                <source>src/example</source>
                             </sourceDirs>
                         </configuration>
                     </execution>
