@@ -15,4 +15,11 @@ class LeaveCreatingTest : BasicTest() {
             `then there should be a leave for the employee`()
         }
     }
+
+    @Test
+    fun `creating a leave should not work if end is before start`() {
+        given(::`organization with employees`, expected = IllegalArgumentException::class) {
+            `when the employee creates a leave`(LocalDate.now(), LocalDate.now().minusDays(1), employee)
+        }
+    }
 }
