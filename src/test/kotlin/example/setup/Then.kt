@@ -21,3 +21,8 @@ fun `test organization`.`then the employee should exist in the test organization
         Assert.assertEquals(role, it.role)
     }
 }
+
+fun `organization with employees`.`then there should be a leave for the employee`() {
+    val list = TestApplication.leaveService.list(employee)
+    Assert.assertEquals(1, list.size)
+}
