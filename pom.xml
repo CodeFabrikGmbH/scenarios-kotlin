@@ -11,6 +11,21 @@
         <junit.version>4.12</junit.version>
     </properties>
 
+    <scm>
+        <connection>scm:git:https://github.com/CodeFabrikGmbH/scenarios-kotlin.git</connection>
+        <developerConnection>scm:git:https://github.com/CodeFabrikGmbH/scenarios-kotlin.git</developerConnection>
+        <url>https://github.com/CodeFabrikGmbH/scenarios-kotlin.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
