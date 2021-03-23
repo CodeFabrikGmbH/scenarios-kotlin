@@ -1,4 +1,5 @@
 # Scenarios
+[![build_status](https://travis-ci.org/CodeFabrikGmbH/scenarios-kotlin.svg?branch=main)](https://travis-ci.org/github/CodeFabrikGmbH/scenarios-kotlin)
 
 This library enables a certain pattern to write readable and maintainable integration tests. It is not a framework that
 integrates automatically with Spring or JavaEE.
