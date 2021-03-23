@@ -6,13 +6,6 @@
     <artifactId>scenarios-kotlin</artifactId>
     <version>develop-SNAPSHOT</version>
 
-    <scm>
-        <connection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</connection>
-        <developerConnection>scm:git:ssh://git@git.code-fabrik.com:2222/codefabrik/scenarios.git</developerConnection>
-        <tag>scenarios-kotlin-test</tag>
-    </scm>
-
-
     <properties>
         <kotlin.version>1.4.31</kotlin.version>
         <junit.version>4.12</junit.version>
