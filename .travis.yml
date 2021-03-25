@@ -1,1 +1,14 @@
 language: java
+
+before_deploy:
+  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+
+deploy:
+  provider: releases
+  api_key: "A7w24Ft5MXbmTkBYWN+6XaU1ZBIameaapxM9LoSnXyrgCaZeFveFikYgtTvLCpHJQl7XjtJXn35HvZFzdiXp8chLWYJ4N9VZT06do1zETQsDgtSHaRdR1kscVJWFqn4pWcgSQ5FiGd201xM9yAoTjuV5Mu1uxpx08JJEhn/jF0+A8GgO1B7hrnAB/K6m4Wo0XrPpxna7T9p8Sb6+1n3KFipD35f13b8i83H6cwahZOpHgMQX9P+H6+NDRhIF9Y7qRU7iib6eAiKCArWRyw/JekInW9sgDYZs+zzszfB5Lbow/nJy2BNo8ebMOfy0vMrtxzpqgWzGLtrA6F5RaLowLM8P3HPjNY0XqhWpLVcHqzrpjmj/3j1M8yv/3LSYoXC5lU7ALb1O8GCPXBrkmiO7jiJiHOwTyc9Ft/70i9peb6ToO2zaGGUvEu7OvupKWkiwW7Lv6bph0HQOVNBCBk/0Ylfz7OfgMGoMRu9RQqs4AU3Saynij+6iZlpxM9E/3AGJQ/5JjxRw9Zj1cMsfb+0dnncxupcnWfN1tjok2h+9/D8VkWkfQ2GNpl8u6IMjD30K6gJJpiPsEtSO9h7FWFs43RYeaCRoNGlHooZ1veTRa7CBgzWFcnyqo9s0j+uM6/fopb6XoWY/XRDAZDcYnuMgJiuHq98bCthP4iPebv2XNGU="
+  file: "target/scenarios-kotlin-$project_version.jar"
+  skip_cleanup: true
+  on:
+    tags: true
+  name: $project_version
