@@ -1,6 +1,6 @@
 package example.domain.model.leave
 
-import example.domain.model.employee.Employee
+import domain.model.employee.Employee
 import java.util.*
 
 interface LeaveRepository {

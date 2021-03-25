@@ -1,7 +1,7 @@
-package example.application
+package application
 
-import example.domain.model.employee.Employee
-import example.domain.model.employee.EmployeeRepository
+import domain.model.employee.Employee
+import domain.model.employee.EmployeeRepository
 import example.domain.model.leave.Leave
 import example.domain.model.leave.LeaveRepository
 import java.lang.RuntimeException

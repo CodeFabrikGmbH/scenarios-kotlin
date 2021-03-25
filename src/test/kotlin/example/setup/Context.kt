@@ -2,9 +2,9 @@ package example.setup
 
 import com.codefabrik.scenarios.Scenario
 import example.TestApplication
-import example.domain.model.employee.Employee
-import example.domain.model.employee.Role
-import example.domain.model.organization.Organization
+import domain.model.employee.Employee
+import domain.model.employee.Role
+import domain.model.organization.Organization
 import java.time.LocalDate
 
 open class `test organization` : Scenario() {

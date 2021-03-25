@@ -1,8 +1,8 @@
-package example.application
+package application
 
-import example.domain.model.employee.Employee
-import example.domain.model.employee.EmployeeRepository
-import example.domain.model.employee.Role
+import domain.model.employee.Employee
+import domain.model.employee.EmployeeRepository
+import domain.model.employee.Role
 import java.util.*
 
 class EmployeeService(

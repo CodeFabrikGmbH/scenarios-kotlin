@@ -1,7 +1,7 @@
 package example.domain.model.leave
 
-import example.domain.model.employee.Employee
-import example.domain.model.employee.Role
+import domain.model.employee.Employee
+import domain.model.employee.Role
 import java.lang.IllegalArgumentException
 import java.lang.RuntimeException
 import java.time.LocalDate

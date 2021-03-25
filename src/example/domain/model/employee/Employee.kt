@@ -1,4 +1,4 @@
-package example.domain.model.employee
+package domain.model.employee
 
 import java.util.*
 

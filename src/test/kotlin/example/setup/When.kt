@@ -2,8 +2,8 @@ package example.setup
 
 import com.codefabrik.scenarios.Scenario
 import example.TestApplication
-import example.domain.model.employee.Employee
-import example.domain.model.employee.Role
+import domain.model.employee.Employee
+import domain.model.employee.Role
 import java.time.LocalDate
 import java.util.*
 

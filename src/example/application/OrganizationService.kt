@@ -1,7 +1,7 @@
-package example.application
+package application
 
-import example.domain.model.organization.Organization
-import example.domain.model.organization.OrganizationRepository
+import domain.model.organization.Organization
+import domain.model.organization.OrganizationRepository
 import java.lang.RuntimeException
 import java.util.*
 

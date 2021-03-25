@@ -1,7 +1,7 @@
-package example.infrastructure.inmemory
+package infrastructure.inmemory
 
-import example.domain.model.organization.Organization
-import example.domain.model.organization.OrganizationRepository
+import domain.model.organization.Organization
+import domain.model.organization.OrganizationRepository
 import java.util.*
 
 class InMemoryOrganizationRepository: OrganizationRepository {

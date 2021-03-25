@@ -1,6 +1,6 @@
-package example.infrastructure.inmemory
+package infrastructure.inmemory
 
-import example.domain.model.employee.Employee
+import domain.model.employee.Employee
 import example.domain.model.leave.Leave
 import example.domain.model.leave.LeaveRepository
 import java.util.*

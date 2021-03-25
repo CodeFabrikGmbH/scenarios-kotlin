@@ -1,11 +1,11 @@
 package example
 
-import example.application.EmployeeService
-import example.application.LeaveService
-import example.application.OrganizationService
-import example.infrastructure.inmemory.InMemoryEmployeeRepository
-import example.infrastructure.inmemory.InMemoryLeaveRepository
-import example.infrastructure.inmemory.InMemoryOrganizationRepository
+import application.EmployeeService
+import application.LeaveService
+import application.OrganizationService
+import infrastructure.inmemory.InMemoryEmployeeRepository
+import infrastructure.inmemory.InMemoryLeaveRepository
+import infrastructure.inmemory.InMemoryOrganizationRepository
 
 object TestApplication {
     private val organizationRepository = InMemoryOrganizationRepository()

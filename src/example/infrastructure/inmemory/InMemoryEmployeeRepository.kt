@@ -1,7 +1,7 @@
-package example.infrastructure.inmemory
+package infrastructure.inmemory
 
-import example.domain.model.employee.Employee
-import example.domain.model.employee.EmployeeRepository
+import domain.model.employee.Employee
+import domain.model.employee.EmployeeRepository
 import java.util.*
 
 class InMemoryEmployeeRepository: EmployeeRepository {
