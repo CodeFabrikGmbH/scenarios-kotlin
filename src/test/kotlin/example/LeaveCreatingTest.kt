@@ -1,6 +1,6 @@
 package example
 
-import com.codefabrik.scenarios.given
+import com.github.codefabrikgmbh.scenarios.given
 import example.setup.*
 import org.junit.Test
 import java.time.LocalDate

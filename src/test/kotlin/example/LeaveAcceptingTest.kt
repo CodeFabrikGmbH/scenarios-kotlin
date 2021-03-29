@@ -1,6 +1,6 @@
 package example
 
-import com.codefabrik.scenarios.given
+import com.github.codefabrikgmbh.scenarios.given
 import org.junit.Test
 import example.setup.`employee with pending leave`
 import example.setup.`then there should be an accepted leave for the employee`

@@ -1,8 +1,8 @@
 package example
 
-import com.codefabrik.scenarios.Scenario
+import com.github.codefabrikgmbh.scenarios.Scenario
+import com.github.codefabrikgmbh.scenarios.given
 import example.setup.`test organization`
-import com.codefabrik.scenarios.given
 import domain.model.employee.Role
 import example.setup.`then the employee should exist in the test organization`
 import example.setup.`when the admin creates an employee with organization`

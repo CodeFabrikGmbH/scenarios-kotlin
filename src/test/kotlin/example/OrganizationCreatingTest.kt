@@ -1,7 +1,7 @@
 package example
 
-import com.codefabrik.scenarios.Scenario
-import com.codefabrik.scenarios.given
+import com.github.codefabrikgmbh.scenarios.Scenario
+import com.github.codefabrikgmbh.scenarios.given
 import example.setup.`then the organization list should contain an organization`
 import example.setup.`when the admin creates an organization`
 import org.junit.Test
