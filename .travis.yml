@@ -27,4 +27,4 @@ env:
   - secure: hH5W64oEgqe+yxBGVR08l+mjg3oQ4ah/4qNgm9Tpa3420Gs+vMoSJh0CXkWOT7p/EVs79XyApzn3Z7+bzUZRP+7Gax2LEs0BNGqnMgsD2lJWthK1gwdSYqyBq7W1SZIT9fQZMST1feShPfpDIdN2r8ToxwV04pIkh7HKGHShbsMU2uif8oQYP5gro2kCbvgbCqgTyiSyV9ZzsnrIDgI6Lrht6Larooxw6Tah4GhJnlr5EjaD+y1a5O/CJZ6PHANG0ZBJNGoelkHHehssIxZsP8LT6PwVdLcTj+c6hH8IWoQms7FEJcRlcQS8oGjEv5wjKkxwXn/yO+kyToPiHhEk0OUaXdtmRdgC7DY1DNgfwBhE83AdmBjH2rBwmI+QBuuUlwpVLXAxZUj4Jqo2244RVRwfOAYWouQnntCPwnABxp6tlNYsv0kBI6vz0XVotsmQZhWnM6gv41LS5ZWuqIXzTjNf8GkMpGBARUPVYILyRQxtTtDNnHTqqXocCwvwDRsLYEQypo6puqQDTivwL9mM+2W4BNMyPNcvisy2TNYkiRUkU+NzjBjQrx3jGdHFaI3AEu9jBfqnaU+D8imP7e/wS47P0xczxe96QODsmOs0qiZenxabZrAOpQ1VWhhzHFcPhr5P/eiafvvVB81k/ZEaCccRqE7/7r7H2S7sItFH1dw=
 before_install:
 - openssl aes-256-cbc -K $encrypted_4f0d00631887_key -iv $encrypted_4f0d00631887_iv
-  -in gpg.asc.enc -out .travis/gpg.asc -d
+  -in .travis/gpg.asc.enc -out .travis/gpg.asc -d
