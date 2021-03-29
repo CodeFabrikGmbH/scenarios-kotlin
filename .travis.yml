@@ -1,15 +1,30 @@
 language: java
-
+install: "/bin/true"
+script:
+- mvn clean install -q -B
 before_deploy:
-  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
-
+- mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+- export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep
+  -v '\[')
 deploy:
-  provider: releases
-  api_key:
-    secure: "fDkqeNTI4NnlaZ+81dtjVnV6Z8b2muXgBhi37FrmWA++/IXLpeORyIn8lXRcmQ5BQGoS56W8OBO2SjZLI4g5ur0jYi9YBgdMMPAtpDAVOLGi20JJNMULxjtmWbyriF9j5tSIi1UzUbhqqrWa+w09tDafYzS0/pgJL2nmZ5l5tb2sYJ390oMZg5iGOk+RSwG2p4WLnltn0h4fIlc5a0NzoBN8r4J74BdTBB6xWSc61rBh1i+eVyv1ibIpGgqxpbCMmx3FY1+OFFHRWwKvI7OWBwqp/QqQ3x9h2Vaxuf9oegwq9XHpB8osnvB24YSYAUivhOyHizjN7dq6zlWjTSbBtEgPmqQ0AefDEZjH3sfRQJj4HEfGWqOy9o0/Pbw9Xj2P2iRQZ4zHdTzc7qDk+WSo5XB6YNhlWy1bS86YSufjGJpEokFdV2r+Itx5tSCJkJ607jnYgcVaz6wJr3lyUx7+I3ZIW0aHr2TnoKPldGbaW6Y7UpzUsqiuDnnRJOymBxaOe8uQOleULZFMpyBnnuMOanlPwTjbD6BgI+W1WbD8pGc9JG2UM1cWGBC3VMQoLqPu58AVOIKLVbh8Eob0ek33wijofv9ZSIOathEAaJabzMX+sJMYzZkIc7Mag9mjrdCl8SKuqqJ+QNeAqmuNxBWadP/jiyeUdIbLk20TncCCbpg="
-  file: "target/scenarios-kotlin-$project_version.jar"
-  skip_cleanup: true
-  on:
-    tags: true
-  name: $project_version
+  -
+    skip_cleanup: true
+    provider: script
+    script: ./deploy
+    on:
+      branch: master
+  -
+    skip_cleanup: true
+    provider: script
+    script: ./deploy
+    on:
+      tags: true
+env:
+  global:
+  - secure: V4nKEEwHa9FkpT5kExtqrscMBZ3UA6WvHVd4zOwKvMchDVNhIkqyHRJEFh9GezqlJtCT2ayjbU+mLpJP7RTodeVYCp5JylaJFL3bJy479U3niJNZNHzXCsfcFXoo2YwkchwhLdbolzwqT0oIkAtJLXxPL1Z+nN1QSx5qte0cmaE1bfEndjIYjs34lWjiM/J3ZXpJB5KKX8sNvNFcNLrztQHyz4J9L+dWpk2JMgmSHCPZ8lpGWG89rn6UhKGhZQj9tTwafsdcOR6blqlRq27cb+8/rCXB7e6D64LbWZYKyv0XtJ5dFLYQUQNV+yoG6Diz0eizocQVxWXqrr2PIlZNik+6cQ1tPd3Hb1hDarOWY3p9ZfTaNyRr2oILg7fxvs5eoBr4G85B0cTGwSLM7yf67DP6G9ccwND30PmSWYlq5Vbqk3kRXsp3o5KW6MILCWYRhPM2JzrebDep/20AqczHEUkvIfKr134ygsIaOrKCbBtvy/BtElF09/crm6wZfBx8FMfWyECH1pc2PD3PPV1Ed5PlqoOzzGYo+UZIEUThAkrBgw3tr7GapMBIC9Xr1JgtkuHomhJHVxIvV35bzBgv7CVSSdPfKaHxxQ2A4HcJV4w2VFrhsiIJHrzFp0hdMKgGTimucdVnClICjGf0ZfXlV5Iaskx51zr0RPFCdMTDBFY=
+  - secure: vcQmkXrOxKGNgVz3LsXq1+KUwbN2w7QCh6fdrqrDnuUzhQI4b8SK7P9O4nePs+P8cyownC0hp6O5Wka77B6VFBXpMbujhRbik0I2htbUrh9xxYZ0YXyoXuuFmsw4yuri13blAAECcMCTMNfRliXL2CGlgO9OxV6Ah5CZLtOZ41F/R0wG4e1w5YLhwWVacr9x3/6y/X0MZIhsCUroh6Ecg7Fkq2sifrsBDxPE2RRhWrnVuPqtULEk6W2b1AVBkogkZMQWu6KLQltTrw1Whk4R2Xz5/zbkkPt/jK4eYvseN7+sEkmyRSQsF3yRcgZoxfwaV0op9qoombYMn4RNgeVUCldGwoKRiq73N6GgW493If01JgfPhwRxCggzeqwvIdI0cB7HS3Nv0R7LzajlEvkquZc3ifCqQT0MVYgkn4DZUMPD73a1jOwVSPnS6Dqtyg45uqXZ1oIeMn6fLe7UsCVuEg0sNtzHA+7YOivKTsyZCzoaiDwbo0fT/6dOui9tbyjeZRDeFrcyHDhV5fUTOHSO20otV3KwuvGsBWHAj5fsXAqLBKfC4tQ7VwTOItZg6sj5jSAEbLRqwSHUInM1p+k2Et2p9DzvDksS3W8mIPOzf1pPTZeDENaHVND7LcPWEY3QCls4vnq3G02H3mImQxMF9+p9Ow7GeFPWP/9YHPpJwLY=
+  - secure: jKIhoz+f4bbfB7tDF5EWxnCDHPNbDTfRpWehgBy5u1ZOyEB3K+RLXyuT38O9fcS9iePnVXAfboPf3Kb3HBj/5FTxER+WzrRYLrBA7Y04UGExjNjJNTQD/8BL9VgSSJaMvbxnqHofkubrXFS3x75fgqElfh54rNGdLezVK87OLVwDPANX9/5fcyJ1D/Dop3unWztOrYKmNq0hwCrEv+vI2Zbigz4UN/eYAXb2vGhkMx+yx0dP/KBSeWGWD4MhYdAHQM6xow2vy9i1H9T0XJ1j2EFHxnDzcCdn/bThiIZvjUUxiqiXmyic5LnOizZlcKjGwsLhDnJfW4moy8NxhunZ4zex1tw7AX6kxCC3iQ6KN4iPshvraq0m3OKnODGO2Dc8wEJAHNhTmFQaRPV526bPqS0DbqU3NFu0sqWKUaAw0CJ0mYVWt2RMAbvnQGqp1+2Srk6mqynMUOjjci/5bf8u5H42bpcSz595i1kH7Y6OjuRfspZi0VyoRQGUreyYgDghizUgYfvIceGFBQ+dQL26INVWXEzqrb8RWnq9ku/320721TQOTj9RS6eP7LEahUE+hScxTL4CIhWPYaG/2tV9if5UeKRJysHBWMfLfusqiT9DMSNmOrdRbr5faguQq4XO/oqIRGVvL1kKZF6E/kpqZfWIn8DLMXIHHtNMix/vGxE=
+  - secure: hH5W64oEgqe+yxBGVR08l+mjg3oQ4ah/4qNgm9Tpa3420Gs+vMoSJh0CXkWOT7p/EVs79XyApzn3Z7+bzUZRP+7Gax2LEs0BNGqnMgsD2lJWthK1gwdSYqyBq7W1SZIT9fQZMST1feShPfpDIdN2r8ToxwV04pIkh7HKGHShbsMU2uif8oQYP5gro2kCbvgbCqgTyiSyV9ZzsnrIDgI6Lrht6Larooxw6Tah4GhJnlr5EjaD+y1a5O/CJZ6PHANG0ZBJNGoelkHHehssIxZsP8LT6PwVdLcTj+c6hH8IWoQms7FEJcRlcQS8oGjEv5wjKkxwXn/yO+kyToPiHhEk0OUaXdtmRdgC7DY1DNgfwBhE83AdmBjH2rBwmI+QBuuUlwpVLXAxZUj4Jqo2244RVRwfOAYWouQnntCPwnABxp6tlNYsv0kBI6vz0XVotsmQZhWnM6gv41LS5ZWuqIXzTjNf8GkMpGBARUPVYILyRQxtTtDNnHTqqXocCwvwDRsLYEQypo6puqQDTivwL9mM+2W4BNMyPNcvisy2TNYkiRUkU+NzjBjQrx3jGdHFaI3AEu9jBfqnaU+D8imP7e/wS47P0xczxe96QODsmOs0qiZenxabZrAOpQ1VWhhzHFcPhr5P/eiafvvVB81k/ZEaCccRqE7/7r7H2S7sItFH1dw=
+before_install:
+- openssl aes-256-cbc -K $encrypted_4f0d00631887_key -iv $encrypted_4f0d00631887_iv
+  -in gpg.asc.enc -out .travis/gpg.asc -d
