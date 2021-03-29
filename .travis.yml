@@ -2,7 +2,7 @@ language: java
 install: "/bin/true"
 cache:
   directories:
-    - $HOME/.m2
+  - "$HOME/.m2"
 script:
 - mvn clean install -q -B
 before_deploy:
@@ -10,18 +10,16 @@ before_deploy:
 - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep
   -v '\[')
 deploy:
-  -
-    skip_cleanup: true
-    provider: script
-    script: ./deploy
-    on:
-      branch: main
-  -
-    skip_cleanup: true
-    provider: script
-    script: ./deploy
-    on:
-      tags: true
+- skip_cleanup: true
+  provider: script
+  script: "./deploy"
+  on:
+    branch: main
+- skip_cleanup: true
+  provider: script
+  script: "./deploy"
+  on:
+    tags: true
 env:
   global:
   - secure: V4nKEEwHa9FkpT5kExtqrscMBZ3UA6WvHVd4zOwKvMchDVNhIkqyHRJEFh9GezqlJtCT2ayjbU+mLpJP7RTodeVYCp5JylaJFL3bJy479U3niJNZNHzXCsfcFXoo2YwkchwhLdbolzwqT0oIkAtJLXxPL1Z+nN1QSx5qte0cmaE1bfEndjIYjs34lWjiM/J3ZXpJB5KKX8sNvNFcNLrztQHyz4J9L+dWpk2JMgmSHCPZ8lpGWG89rn6UhKGhZQj9tTwafsdcOR6blqlRq27cb+8/rCXB7e6D64LbWZYKyv0XtJ5dFLYQUQNV+yoG6Diz0eizocQVxWXqrr2PIlZNik+6cQ1tPd3Hb1hDarOWY3p9ZfTaNyRr2oILg7fxvs5eoBr4G85B0cTGwSLM7yf67DP6G9ccwND30PmSWYlq5Vbqk3kRXsp3o5KW6MILCWYRhPM2JzrebDep/20AqczHEUkvIfKr134ygsIaOrKCbBtvy/BtElF09/crm6wZfBx8FMfWyECH1pc2PD3PPV1Ed5PlqoOzzGYo+UZIEUThAkrBgw3tr7GapMBIC9Xr1JgtkuHomhJHVxIvV35bzBgv7CVSSdPfKaHxxQ2A4HcJV4w2VFrhsiIJHrzFp0hdMKgGTimucdVnClICjGf0ZfXlV5Iaskx51zr0RPFCdMTDBFY=
