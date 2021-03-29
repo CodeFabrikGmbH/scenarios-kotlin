@@ -12,7 +12,7 @@ deploy:
     provider: script
     script: ./deploy
     on:
-      branch: master
+      branch: main
   -
     skip_cleanup: true
     provider: script
