@@ -1,6 +1,6 @@
 package example.setup
 
-import com.codefabrik.scenarios.Scenario
+import com.github.codefabrikgmbh.scenarios.Scenario
 import example.TestApplication
 import domain.model.employee.Role
 import example.domain.model.leave.LeaveStatus

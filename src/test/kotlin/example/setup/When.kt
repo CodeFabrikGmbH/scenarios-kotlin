@@ -1,6 +1,6 @@
 package example.setup
 
-import com.codefabrik.scenarios.Scenario
+import com.github.codefabrikgmbh.scenarios.Scenario
 import example.TestApplication
 import domain.model.employee.Employee
 import domain.model.employee.Role
