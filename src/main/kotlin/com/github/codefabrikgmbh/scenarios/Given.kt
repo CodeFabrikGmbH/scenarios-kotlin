@@ -1,4 +1,4 @@
-package com.codefabrik.scenarios
+package com.github.codefabrikgmbh.scenarios
 
 import kotlin.reflect.KClass
 
