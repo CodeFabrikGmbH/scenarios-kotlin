@@ -1,5 +1,8 @@
 language: java
 install: "/bin/true"
+cache:
+  directories:
+    - $HOME/.m2
 script:
 - mvn clean install -q -B
 before_deploy:
