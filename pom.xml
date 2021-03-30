@@ -5,11 +5,22 @@
     <groupId>com.github.codefabrikgmbh</groupId>
     <artifactId>scenarios-kotlin</artifactId>
     <version>develop-SNAPSHOT</version>
+    <url>https://github.com/CodeFabrikGmbH/scenarios-kotlin</url>
+    <name>Scenarios Kotlin</name>
+    <description>Library for easily writing readable and maintainable integration tests</description>
 
     <properties>
         <kotlin.version>1.4.31</kotlin.version>
         <junit.version>4.12</junit.version>
     </properties>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <scm>
         <connection>scm:git:https://github.com/CodeFabrikGmbH/scenarios-kotlin.git</connection>
@@ -17,6 +28,31 @@
         <url>https://github.com/CodeFabrikGmbH/scenarios-kotlin.git</url>
         <tag>HEAD</tag>
     </scm>
+
+    <developers>
+        <developer>
+            <name>Dimitri Schrul</name>
+            <id>dschrul-cf</id>
+            <email>dimitri.schrul@code-fabrik.com</email>
+            <organization>CodeFabrik GmbH</organization>
+            <timezone>+1</timezone>
+            <roles>
+                <role>architect</role>
+                <role>committer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Felix Seemann</name>
+            <id>fseemann</id>
+            <email>felix.seemann@code-fabrik.com</email>
+            <organization>CodeFabrik GmbH</organization>
+            <timezone>+1</timezone>
+            <roles>
+                <role>architect</role>
+                <role>committer</role>
+            </roles>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>
