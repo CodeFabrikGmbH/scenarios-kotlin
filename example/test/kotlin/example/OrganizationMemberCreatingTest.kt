@@ -19,8 +19,8 @@ class OrganizationMemberCreatingTest: BasicTest() {
     @Test
     fun `creating a supervisor should work`() {
         given(::`test organization`) {
-            `when the admin creates an organization member`("Test Employee", Role.SUPERVISOR)
-            `then an organization member should exist in the test organization`("Test Employee", Role.SUPERVISOR)
+            `when the admin creates an organization member`("Test Supervisor", Role.SUPERVISOR)
+            `then an organization member should exist in the test organization`("Test Supervisor", Role.SUPERVISOR)
         }
     }
 
