@@ -1,23 +1,23 @@
 package example.setup
 
-import example.application.EmployeeService
 import example.application.LeaveService
+import example.application.OrganizationMemberService
 import example.application.OrganizationService
-import example.infrastructure.inmemory.InMemoryEmployeeRepository
 import example.infrastructure.inmemory.InMemoryLeaveRepository
+import example.infrastructure.inmemory.InMemoryOrganizationMemberRepository
 import example.infrastructure.inmemory.InMemoryOrganizationRepository
 
 object TestApplication {
     private val organizationRepository = InMemoryOrganizationRepository()
-    private val employeeRepository = InMemoryEmployeeRepository()
+    private val organizationMemberRepository = InMemoryOrganizationMemberRepository()
     private val leaveRepository = InMemoryLeaveRepository()
     val organizationService: OrganizationService = OrganizationService(organizationRepository)
-    val employeeService: EmployeeService = EmployeeService(employeeRepository, organizationService)
-    val leaveService: LeaveService = LeaveService(leaveRepository, employeeRepository)
+    val organizationMemberService: OrganizationMemberService = OrganizationMemberService(organizationMemberRepository, organizationService)
+    val leaveService: LeaveService = LeaveService(leaveRepository, organizationMemberRepository)
 
     fun cleanUp() {
         organizationRepository.clear()
-        employeeRepository.clear()
+        organizationMemberRepository.clear()
         leaveRepository.clear()
     }
 }

@@ -1,7 +1,7 @@
 package example.domain.leave
 
-import example.domain.employee.Employee
-import example.domain.employee.Role
+import example.domain.organizationmember.OrganizationMember
+import example.domain.organizationmember.Role
 import java.time.LocalDate
 import java.util.*
 
@@ -9,7 +9,7 @@ class Leave private constructor(
     val start: LocalDate,
     val end: LocalDate,
     var status: LeaveStatus,
-    val employeeId: UUID,
+    val organizationMemberId: UUID,
     val id: UUID = UUID.randomUUID()
 ) {
     companion object {
@@ -21,8 +21,8 @@ class Leave private constructor(
         }
     }
 
-    fun accept(employee: Employee) {
-        if (employee.role != Role.SUPERVISOR) {
+    fun accept(organizationMember: OrganizationMember) {
+        if (organizationMember.role != Role.SUPERVISOR) {
             throw RuntimeException("leave.error.acceptingEmployeeIsNotSupervisor")
         }
         status = LeaveStatus.ACCEPTED

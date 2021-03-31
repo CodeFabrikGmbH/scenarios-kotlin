@@ -1,8 +1,8 @@
 package example.setup
 
 import com.github.codefabrikgmbh.scenarios.Scenario
-import example.domain.employee.Role
 import example.domain.leave.LeaveStatus
+import example.domain.organizationmember.Role
 import org.junit.Assert
 
 fun Scenario.`then the organization list should contain an organization`(organizationName: String) {
@@ -11,25 +11,25 @@ fun Scenario.`then the organization list should contain an organization`(organiz
     Assert.assertEquals(organizationName, list[0].name)
 }
 
-fun `test organization`.`then the employee should exist in the test organization`(employeeName: String, role: Role) {
-    val list = TestApplication.employeeService.list()
-    val employee = list.find { it.name == employeeName }
-    Assert.assertNotNull(employee)
-    employee?.let {
-        Assert.assertEquals(employeeName, it.name)
+fun `test organization`.`then an organization member should exist in the test organization`(organizationMemberName: String, role: Role) {
+    val list = TestApplication.organizationMemberService.list()
+    val organizationMember = list.find { it.name == organizationMemberName }
+    Assert.assertNotNull(organizationMember)
+    organizationMember?.let {
+        Assert.assertEquals(organizationMemberName, it.name)
         Assert.assertEquals(testOrganization.id, it.organizationId)
         Assert.assertEquals(role, it.role)
     }
 }
 
-fun `organization with employees`.`then there should be a pending leave for the employee`() {
-    val list = TestApplication.leaveService.list(employee)
+fun `organization with supervisor and employee`.`then the employee should have a pending leave`() {
+    val list = TestApplication.leaveService.list(employee.id)
     Assert.assertEquals(1, list.size)
     Assert.assertEquals(LeaveStatus.PENDING, list[0].status)
 }
 
-fun `organization with employees`.`then there should be an accepted leave for the employee`() {
-    val list = TestApplication.leaveService.list(employee)
+fun `organization with supervisor and employee`.`then the employee should have an accepted leave`() {
+    val list = TestApplication.leaveService.list(employee.id)
     Assert.assertEquals(1, list.size)
     Assert.assertEquals(LeaveStatus.ACCEPTED, list[0].status)
 }

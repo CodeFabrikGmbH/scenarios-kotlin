@@ -1,8 +1,8 @@
-package example.domain.employee
+package example.domain.organizationmember
 
 import java.util.*
 
-class Employee(
+class OrganizationMember(
     val name: String,
     val organizationId: UUID,
     val role: Role,
