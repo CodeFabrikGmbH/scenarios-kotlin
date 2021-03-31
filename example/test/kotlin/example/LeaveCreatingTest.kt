@@ -1,7 +1,10 @@
 package example
 
 import com.github.codefabrikgmbh.scenarios.given
-import example.setup.*
+import example.setup.BasicTest
+import example.setup.`organization with employees`
+import example.setup.`then there should be a pending leave for the employee`
+import example.setup.`when the employee requests a leave`
 import org.junit.Test
 import java.time.LocalDate
 
