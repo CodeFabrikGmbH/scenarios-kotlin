@@ -25,6 +25,7 @@ Please take a look into our example project [here](https://github.com/CodeFabrik
     <groupId>com.github.codefabrikgmbh</groupId>
     <artifactId>scenarios-kotlin</artifactId>
     <version>1.0.1</version>
+    <scope>test</scope>
 </dependency>
 ```
 
