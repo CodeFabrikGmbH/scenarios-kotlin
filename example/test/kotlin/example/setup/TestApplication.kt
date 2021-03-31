@@ -12,7 +12,8 @@ object TestApplication {
     private val organizationMemberRepository = InMemoryOrganizationMemberRepository()
     private val leaveRepository = InMemoryLeaveRepository()
     val organizationService: OrganizationService = OrganizationService(organizationRepository)
-    val organizationMemberService: OrganizationMemberService = OrganizationMemberService(organizationMemberRepository, organizationService)
+    val organizationMemberService: OrganizationMemberService =
+        OrganizationMemberService(organizationMemberRepository, organizationService)
     val leaveService: LeaveService = LeaveService(leaveRepository, organizationMemberRepository)
 
     fun cleanUp() {

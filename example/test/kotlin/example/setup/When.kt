@@ -9,7 +9,11 @@ fun Scenario.`when the admin creates an organization`(organizationName: String) 
     TestApplication.organizationService.create(organizationName)
 }
 
-fun Scenario.`when the admin creates an organization member with organization`(employeeName: String, organizationId: UUID, role: Role) {
+fun Scenario.`when the admin creates an organization member with organization`(
+    employeeName: String,
+    organizationId: UUID,
+    role: Role
+) {
     TestApplication.organizationMemberService.create(employeeName, organizationId, role)
 }
 

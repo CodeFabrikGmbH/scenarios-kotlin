@@ -11,8 +11,10 @@ open class `test organization` : Scenario() {
 }
 
 open class `organization with supervisor and employee` : `test organization`() {
-    val supervisor = TestApplication.organizationMemberService.create("supervisor", testOrganization.id, Role.SUPERVISOR)
-    val employee: OrganizationMember = TestApplication.organizationMemberService.create("employee", testOrganization.id, Role.EMPLOYEE)
+    val supervisor =
+        TestApplication.organizationMemberService.create("supervisor", testOrganization.id, Role.SUPERVISOR)
+    val employee: OrganizationMember =
+        TestApplication.organizationMemberService.create("employee", testOrganization.id, Role.EMPLOYEE)
 }
 
 open class `employee with pending leave` : `organization with supervisor and employee`() {

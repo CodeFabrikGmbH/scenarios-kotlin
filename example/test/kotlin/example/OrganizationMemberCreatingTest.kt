@@ -7,7 +7,7 @@ import example.setup.*
 import org.junit.Test
 import java.util.*
 
-class OrganizationMemberCreatingTest: BasicTest() {
+class OrganizationMemberCreatingTest : BasicTest() {
     @Test
     fun `creating an employee should work`() {
         given(::`test organization`) {
@@ -27,7 +27,11 @@ class OrganizationMemberCreatingTest: BasicTest() {
     @Test
     fun `creating an employee should not work if the organization does not exist`() {
         given(::Scenario, expected = RuntimeException::class) {
-            `when the admin creates an organization member with organization`("Test Employee", UUID.randomUUID(), Role.EMPLOYEE)
+            `when the admin creates an organization member with organization`(
+                "Test Employee",
+                UUID.randomUUID(),
+                Role.EMPLOYEE
+            )
         }
     }
 }

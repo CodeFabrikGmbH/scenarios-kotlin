@@ -11,7 +11,10 @@ fun Scenario.`then the organization list should contain an organization`(organiz
     Assert.assertEquals(organizationName, list[0].name)
 }
 
-fun `test organization`.`then an organization member should exist in the test organization`(organizationMemberName: String, role: Role) {
+fun `test organization`.`then an organization member should exist in the test organization`(
+    organizationMemberName: String,
+    role: Role
+) {
     val list = TestApplication.organizationMemberService.list()
     val organizationMember = list.find { it.name == organizationMemberName }
     Assert.assertNotNull(organizationMember)

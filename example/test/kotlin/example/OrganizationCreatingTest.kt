@@ -7,7 +7,7 @@ import example.setup.`then the organization list should contain an organization`
 import example.setup.`when the admin creates an organization`
 import org.junit.Test
 
-class OrganizationCreatingTest: BasicTest() {
+class OrganizationCreatingTest : BasicTest() {
     @Test
     fun `creating an organization should work`() {
         given(::Scenario) {

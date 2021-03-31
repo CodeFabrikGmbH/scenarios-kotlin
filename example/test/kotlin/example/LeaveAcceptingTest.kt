@@ -4,7 +4,7 @@ import com.github.codefabrikgmbh.scenarios.given
 import example.setup.*
 import org.junit.Test
 
-class LeaveAcceptingTest: BasicTest() {
+class LeaveAcceptingTest : BasicTest() {
     @Test
     fun `accepting a leave as supervisor should work`() {
         given(::`employee with pending leave`) {
