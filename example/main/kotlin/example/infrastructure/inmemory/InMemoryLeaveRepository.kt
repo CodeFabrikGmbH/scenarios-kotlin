@@ -20,6 +20,10 @@ class InMemoryLeaveRepository : LeaveRepository {
         return leaveById[leaveId]
     }
 
+    override fun get(leaveId: UUID): Leave {
+        return leaveById[leaveId] ?: throw RuntimeException("leave.error.leaveDoesNotExist")
+    }
+
     fun clear() {
         leaveById.clear()
     }

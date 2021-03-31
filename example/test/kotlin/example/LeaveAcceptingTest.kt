@@ -15,7 +15,7 @@ class LeaveAcceptingTest : BasicTest() {
 
     @Test
     fun `accepting a leave as an employee should result in an error`() {
-        given(::`employee with pending leave`, expected = RuntimeException::class) {
+        given(::`employee with pending leave`, expected = IllegalArgumentException::class) {
             `when the employee accepts the pending leave`()
         }
     }

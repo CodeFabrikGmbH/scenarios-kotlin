@@ -11,7 +11,7 @@ fun Scenario.`then the organization list should contain an organization`(organiz
     Assert.assertEquals(organizationName, list[0].name)
 }
 
-fun `test organization`.`then an organization member should exist in the test organization`(
+fun `test organization`.`then an organization member should exist`(
     organizationMemberName: String,
     role: Role
 ) {

@@ -20,6 +20,11 @@ class InMemoryOrganizationMemberRepository : OrganizationMemberRepository {
         return organizationMemberById[organizationMemberId]
     }
 
+    override fun get(organizationMemberId: UUID): OrganizationMember {
+        return organizationMemberById[organizationMemberId]
+            ?: throw RuntimeException("leave.error.acceptorDoesNotExist")
+    }
+
     fun clear() {
         organizationMemberById.clear()
     }

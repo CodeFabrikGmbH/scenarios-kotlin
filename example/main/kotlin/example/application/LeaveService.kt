@@ -20,9 +20,8 @@ class LeaveService(
     }
 
     fun accept(acceptorId: UUID, leaveId: UUID): Leave {
-        val leave = leaveRepository.find(leaveId) ?: throw RuntimeException("leave.error.leaveDoesNotExist")
-        val acceptor =
-            organizationMemberRepository.find(acceptorId) ?: throw RuntimeException("leave.error.acceptorDoesNotExist")
+        val leave = leaveRepository.get(leaveId)
+        val acceptor = organizationMemberRepository.get(acceptorId)
         leave.accept(acceptor)
         return leave
     }

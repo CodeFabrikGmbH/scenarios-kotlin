@@ -12,7 +12,7 @@ class OrganizationMemberCreatingTest : BasicTest() {
     fun `creating an employee should work`() {
         given(::`test organization`) {
             `when the admin creates an organization member`("Test Employee", Role.EMPLOYEE)
-            `then an organization member should exist in the test organization`("Test Employee", Role.EMPLOYEE)
+            `then an organization member should exist`("Test Employee", Role.EMPLOYEE)
         }
     }
 
@@ -20,17 +20,17 @@ class OrganizationMemberCreatingTest : BasicTest() {
     fun `creating a supervisor should work`() {
         given(::`test organization`) {
             `when the admin creates an organization member`("Test Supervisor", Role.SUPERVISOR)
-            `then an organization member should exist in the test organization`("Test Supervisor", Role.SUPERVISOR)
+            `then an organization member should exist`("Test Supervisor", Role.SUPERVISOR)
         }
     }
 
     @Test
-    fun `creating an employee should not work if the organization does not exist`() {
-        given(::Scenario, expected = RuntimeException::class) {
+    fun `creating an organization member should not work if the organization does not exist`() {
+        given(::Scenario, expected = AssertionError::class) {
             `when the admin creates an organization member with organization`(
-                "Test Employee",
-                UUID.randomUUID(),
-                Role.EMPLOYEE
+                employeeName = "Test Employee",
+                organizationId = UUID.randomUUID(),
+                role = Role.EMPLOYEE
             )
         }
     }

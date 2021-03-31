@@ -23,7 +23,7 @@ class Leave private constructor(
 
     fun accept(organizationMember: OrganizationMember) {
         if (organizationMember.role != Role.SUPERVISOR) {
-            throw RuntimeException("leave.error.acceptingEmployeeIsNotSupervisor")
+            throw IllegalArgumentException("leave.error.acceptingEmployeeIsNotSupervisor")
         }
         status = LeaveStatus.ACCEPTED
     }

@@ -20,6 +20,10 @@ class InMemoryOrganizationRepository : OrganizationRepository {
         return organizationById[organizationId]
     }
 
+    override fun assertExists(organizationId: UUID) {
+        organizationById[organizationId] ?: throw AssertionError("organization.error.doesNotExist")
+    }
+
     fun clear() {
         organizationById.clear()
     }
