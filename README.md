@@ -20,9 +20,9 @@ fun `creating an employee should work`() {
 
 ```xml
 <dependency>
-    <groupId>com.codefabrik.scenarios</groupId>
+    <groupId>com.github.codefabrikgmbh</groupId>
     <artifactId>scenarios-kotlin</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
