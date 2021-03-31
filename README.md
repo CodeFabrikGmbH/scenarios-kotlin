@@ -16,6 +16,8 @@ fun `creating an employee should work`() {
 } 
 ```
 
+Please take a look into our example project [here](https://github.com/CodeFabrikGmbH/scenarios-kotlin/tree/main/example). We created a sample application with a complete test setup.
+
 ## Getting Started
 
 ```xml
