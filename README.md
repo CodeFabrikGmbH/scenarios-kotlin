@@ -10,10 +10,10 @@ integrates automatically with Spring or JavaEE.
 @Test
 fun `creating an employee should work`() {
     given(::`test organization`) {
-        `when the admin creates an employee`("Test Employee", Role.EMPLOYEE)
-        `then the employee should exist in the test organization`("Test Employee", Role.EMPLOYEE)
+        `when the admin creates an organization member`("Test Employee", Role.EMPLOYEE)
+        `then an organization member should exist`("Test Employee", Role.EMPLOYEE)
     }
-} 
+}
 ```
 
 Please take a look into our example project [here](https://github.com/CodeFabrikGmbH/scenarios-kotlin/tree/main/example). We created a sample application with a complete test setup.
