@@ -6,6 +6,7 @@ fun <T : Scenario> given(
     scenarioSupplier: () -> T,
     expected: KClass<*>? = null,
     afterScenario: () -> Unit = {},
+    verificationSteps: T.() -> Unit = {},
     executeSteps: T.() -> Unit
 ) {
     val scenarioResult = runCatching(scenarioSupplier)
@@ -15,6 +16,8 @@ fun <T : Scenario> given(
     }
 
     val stepsResult = scenarioResult.mapCatching(executeSteps)
+
+    val verificationResult = scenarioResult.mapCatching(verificationSteps)
 
     afterScenario()
 
@@ -28,4 +31,6 @@ fun <T : Scenario> given(
     } else {
         stepsResult.onFailure { throw it }
     }
+
+    verificationResult.onFailure { throw it }
 }
