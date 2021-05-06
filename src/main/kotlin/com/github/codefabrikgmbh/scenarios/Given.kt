@@ -4,9 +4,24 @@ import kotlin.reflect.KClass
 
 fun <T : Scenario> given(
     scenarioSupplier: () -> T,
-    expected: KClass<*>? = null,
+    expected: KClass<Throwable>? = null,
     afterScenario: () -> Unit = {},
-    verificationSteps: T.() -> Unit = {},
+    executeSteps: T.() -> Unit
+) {
+    given(
+        scenarioSupplier,
+        expected,
+        afterScenario,
+        {},
+        executeSteps
+    )
+}
+
+inline fun <T : Scenario, reified K : Throwable> given(
+    scenarioSupplier: () -> T,
+    expected: KClass<K>? = null,
+    afterScenario: () -> Unit = {},
+    verificationSteps: T.(K?) -> Unit = {},
     executeSteps: T.() -> Unit
 ) {
     val scenarioResult = runCatching(scenarioSupplier)
@@ -17,7 +32,10 @@ fun <T : Scenario> given(
 
     val stepsResult = scenarioResult.mapCatching(executeSteps)
 
-    val verificationResult = scenarioResult.mapCatching(verificationSteps)
+    val exception = stepsResult.exceptionOrNull()
+    if (exception !is K?) throw exception!!
+
+    val verificationResult = scenarioResult.mapCatching{ verificationSteps(it, exception)}
 
     afterScenario()
 
