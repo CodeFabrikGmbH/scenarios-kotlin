@@ -21,8 +21,8 @@ inline fun <T : Scenario, reified K : Throwable> given(
     scenarioSupplier: () -> T,
     expected: KClass<K>? = null,
     afterScenario: () -> Unit = {},
-    verificationSteps: T.(K?) -> Unit = {},
-    executeSteps: T.() -> Unit
+    then: T.(K?) -> Unit = {},
+    `when`: T.() -> Unit
 ) {
     val scenarioResult = runCatching(scenarioSupplier)
     scenarioResult.onFailure {
@@ -30,12 +30,12 @@ inline fun <T : Scenario, reified K : Throwable> given(
         throw AssertionError("Context is invalid.")
     }
 
-    val stepsResult = scenarioResult.mapCatching(executeSteps)
+    val stepsResult = scenarioResult.mapCatching(`when`)
 
     val exception = stepsResult.exceptionOrNull()
     if (exception !is K?) throw exception!!
 
-    val verificationResult = scenarioResult.mapCatching{ verificationSteps(it, exception)}
+    val verificationResult = scenarioResult.mapCatching{ then(it, exception)}
 
     afterScenario()
 

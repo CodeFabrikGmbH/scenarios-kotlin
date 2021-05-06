@@ -30,10 +30,10 @@ class VerificationTest {
     fun `verification steps are executed after the exception was caught`() {
         given(::`verification scenario`,
             expected = MyException::class,
-            executeSteps = {
+            `when` = {
                 `this throws an exception`("this went wrong")
             },
-            verificationSteps = {
+            then = {
                 `then the exception matches this special value`(it, "this went wrong")
             }
         )
