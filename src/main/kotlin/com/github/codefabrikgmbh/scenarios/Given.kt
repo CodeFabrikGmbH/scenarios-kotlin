@@ -11,15 +11,16 @@ fun <T : Scenario> given(
 }
 
 class ScenarioRunner<T : Scenario>(
-    val scenarioSupplier: () -> T,
-    val afterScenario: () -> Unit,
-    val executeSteps: T.() -> Unit
+    private val scenarioSupplier: () -> T,
+    private val afterScenario: () -> Unit,
+    private val executeSteps: T.() -> Unit
 ) {
     fun run() {
         run<Unit>(null)
     }
 
-    inline fun <reified K : Any> run(expected: KClass<K>?, runSteps: T.(K) -> Unit = {}) {
+    @Suppress("UNCHECKED_CAST")
+    fun <K : Any> run(expected: KClass<K>?, runSteps: T.(K) -> Unit = {}) {
         val scenarioResult = runCatching(scenarioSupplier)
         scenarioResult.onFailure {
             afterScenario()
@@ -32,10 +33,8 @@ class ScenarioRunner<T : Scenario>(
             afterScenario()
             stepsResult.onFailure { throw it }
         } else {
-            val exception = stepsResult.exceptionOrNull()
-            if (exception !is K?) throw exception!!
-
-            val verificationResult = scenarioResult.mapCatching { runSteps(it, exception!!) }
+            val exception = stepsResult.exceptionOrNull() ?: throw AssertionError("Expected error $expected has not been thrown.")
+            val verificationResult = scenarioResult.mapCatching { runSteps(it, exception as K) }
 
             afterScenario()
 
