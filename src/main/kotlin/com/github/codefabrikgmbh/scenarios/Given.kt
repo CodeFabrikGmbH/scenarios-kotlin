@@ -4,51 +4,49 @@ import kotlin.reflect.KClass
 
 fun <T : Scenario> given(
     scenarioSupplier: () -> T,
-    expected: KClass<Throwable>? = null,
     afterScenario: () -> Unit = {},
     executeSteps: T.() -> Unit
-) {
-    given(
-        scenarioSupplier,
-        expected,
-        afterScenario,
-        {},
-        executeSteps
-    )
+): ScenarioRunner<T> {
+    return ScenarioRunner(scenarioSupplier, afterScenario, executeSteps)
 }
 
-inline fun <T : Scenario, reified K : Throwable> given(
-    scenarioSupplier: () -> T,
-    expected: KClass<K>? = null,
-    afterScenario: () -> Unit = {},
-    then: T.(K?) -> Unit = {},
-    `when`: T.() -> Unit
+class ScenarioRunner<T : Scenario>(
+    val scenarioSupplier: () -> T,
+    val afterScenario: () -> Unit,
+    val executeSteps: T.() -> Unit
 ) {
-    val scenarioResult = runCatching(scenarioSupplier)
-    scenarioResult.onFailure {
-        afterScenario()
-        throw AssertionError("Context is invalid.")
+    fun run() {
+        run<Unit>(null)
     }
 
-    val stepsResult = scenarioResult.mapCatching(`when`)
-
-    val exception = stepsResult.exceptionOrNull()
-    if (exception !is K?) throw exception!!
-
-    val verificationResult = scenarioResult.mapCatching{ then(it, exception)}
-
-    afterScenario()
-
-    if (expected != null) {
-        stepsResult.onSuccess {
-            throw AssertionError("Expected error $expected has not been thrown.")
+    inline fun <reified K : Any> run(expected: KClass<K>?, runSteps: T.(K) -> Unit = {}) {
+        val scenarioResult = runCatching(scenarioSupplier)
+        scenarioResult.onFailure {
+            afterScenario()
+            throw AssertionError("Context is invalid.")
         }
-        stepsResult.onFailure {
-            if (it::class == expected) null else throw it
+
+        val stepsResult = scenarioResult.mapCatching(this.executeSteps)
+
+        if (expected == null) {
+            afterScenario()
+            stepsResult.onFailure { throw it }
+        } else {
+            val exception = stepsResult.exceptionOrNull()
+            if (exception !is K?) throw exception!!
+
+            val verificationResult = scenarioResult.mapCatching { runSteps(it, exception!!) }
+
+            afterScenario()
+
+            stepsResult.onSuccess {
+                throw AssertionError("Expected error $expected has not been thrown.")
+            }
+            stepsResult.onFailure {
+                if (it::class == expected) null else throw it
+            }
+
+            verificationResult.onFailure { throw it }
         }
-    } else {
-        stepsResult.onFailure { throw it }
     }
-
-    verificationResult.onFailure { throw it }
 }

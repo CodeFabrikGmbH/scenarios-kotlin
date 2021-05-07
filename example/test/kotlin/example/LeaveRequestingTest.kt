@@ -14,13 +14,13 @@ class LeaveRequestingTest : BasicTest() {
         given(::`organization with supervisor and employee`) {
             `when the employee requests a leave`(LocalDate.now().minusDays(4), LocalDate.now())
             `then the employee should have a pending leave`()
-        }
+        }.run()
     }
 
     @Test
     fun `requesting a leave should not work if end is before start`() {
-        given(::`organization with supervisor and employee`, expected = IllegalArgumentException::class) {
+        given(::`organization with supervisor and employee`) {
             `when the employee requests a leave`(LocalDate.now(), LocalDate.now().minusDays(1))
-        }
+        }.run(IllegalArgumentException::class)
     }
 }
