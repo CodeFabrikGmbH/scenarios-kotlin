@@ -20,32 +20,32 @@ class ScenarioRunner<T : Scenario>(
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun <K : Any> runExpecting(expected: KClass<K>?, runSteps: T.(K) -> Unit = {}) {
+    fun <K : Any> runExpecting(expected: KClass<K>?, expectationSteps: T.(K) -> Unit = {}) {
         val scenarioResult = runCatching(scenarioSupplier)
         scenarioResult.onFailure {
             afterScenario()
             throw AssertionError("Context is invalid.")
         }
 
-        val stepsResult = scenarioResult.mapCatching(this.executeSteps)
+        val executionResult = scenarioResult.mapCatching(this.executeSteps)
 
         if (expected == null) {
             afterScenario()
-            stepsResult.onFailure { throw it }
+            executionResult.onFailure { throw it }
         } else {
-            val exception = stepsResult.exceptionOrNull() ?: throw AssertionError("Expected error $expected has not been thrown.")
-            val verificationResult = scenarioResult.mapCatching { runSteps(it, exception as K) }
+            val exception = executionResult.exceptionOrNull() ?: throw AssertionError("Expected error $expected has not been thrown.")
+            val expectationResult = scenarioResult.mapCatching { expectationSteps(it, exception as K) }
 
             afterScenario()
 
-            stepsResult.onSuccess {
+            executionResult.onSuccess {
                 throw AssertionError("Expected error $expected has not been thrown.")
             }
-            stepsResult.onFailure {
-                if (it::class == expected) null else throw it
+            executionResult.onFailure {
+                if (it::class != expected) throw it
             }
 
-            verificationResult.onFailure { throw it }
+            expectationResult.onFailure { throw it }
         }
     }
 }
