@@ -21,6 +21,6 @@ class LeaveRequestingTest : BasicTest() {
     fun `requesting a leave should not work if end is before start`() {
         given(::`organization with supervisor and employee`) {
             `when the employee requests a leave`(LocalDate.now(), LocalDate.now().minusDays(1))
-        }.run(IllegalArgumentException::class)
+        }.runExpecting(IllegalArgumentException::class)
     }
 }

@@ -3,12 +3,18 @@ package com.github.codefabrikgmbh.scenarios
 import org.junit.Assert
 import org.junit.Test
 
-class SpecialException(message: String, val specialValue: String) : RuntimeException(message)
+class ExpectationException(message: String, val specialValue: String) : RuntimeException(message)
 
-class `test scenario` : Scenario() {
+class `exception throwing scenario` : Scenario() {
+    init {
+        throw IllegalStateException("You created an invalided context!")
+    }
+}
+
+class `variable scenario` : Scenario() {
     var variable = ""
 
-    fun `given the variable is set to`(value: String) {
+    fun `when the variable is set to`(value: String) {
         variable = value
     }
 
@@ -16,82 +22,76 @@ class `test scenario` : Scenario() {
         Assert.assertEquals(value, this.variable)
     }
 
-    fun `when this throws an exception`(value: String) {
-        throw SpecialException("This is an exception!", value)
+    fun `when this throws an exception`(value: String = "") {
+        throw ExpectationException("This is an exception!", value)
     }
 
-    fun `then the user gets the message`(e: SpecialException, value: String) {
+    fun `then an exception has the message`(e: ExpectationException, value: String) {
         Assert.assertEquals(value, e.specialValue)
     }
 }
 
 class GivenTest {
-    @Test
-    fun `run without expectation`() {
-        given(::`test scenario`) {
-            `given the variable is set to`("other")
+    @Test(expected = AssertionError::class)
+    fun `invalid context should result in a failed test`() {
+        given(::`exception throwing scenario`){
         }.run()
     }
 
-    @Test(expected = SpecialException::class)
-    fun `run without expectation causes exception`() {
-        given(::`test scenario`) {
-            `given the variable is set to`("other")
-            `when this throws an exception`("username.already.taken")
+    @Test(expected = ExpectationException::class)
+    fun `throwing an exception should result in a failed test`() {
+        given(::`variable scenario`) {
+            `when this throws an exception`()
         }.run()
     }
 
     @Test(expected = AssertionError::class)
-    fun `run with expectation without exception`() {
-        given(::`test scenario`) {
-            `given the variable is set to`("other")
-        }.run(SpecialException::class)
+    fun `expecting an exception and none is thrown should result in a failed test`() {
+        given(::`variable scenario`) {
+        }.runExpecting(ExpectationException::class)
     }
 
     @Test
-    fun `run with expectation causes exception`() {
-        given(::`test scenario`) {
-            `given the variable is set to`("other")
+    fun `expecting an exception should work`() {
+        given(::`variable scenario`) {
             `when this throws an exception`("username.already.taken")
-        }.run(SpecialException::class) {
-            `then the user gets the message`(it, "username.already.taken")
+        }.runExpecting(ExpectationException::class) {
+            `then an exception has the message`(it, "username.already.taken")
         }
     }
 
     @Test(expected = AssertionError::class)
-    fun `run with expectation causes wrong exception value`() {
-        given(::`test scenario`) {
-            `given the variable is set to`("other")
+    fun `expecting an exception with a different value should result in a failed test`() {
+        given(::`variable scenario`) {
             `when this throws an exception`("username.already.taken")
-        }.run(SpecialException::class) {
-            `then the user gets the message`(it, "username.not.found")
+        }.runExpecting(ExpectationException::class) {
+            `then an exception has the message`(it, "username.not.found")
         }
     }
 
-    @Test(expected = SpecialException::class)
-    fun `run with expectation causes wrong exception type`() {
-        given(::`test scenario`) {
-            `given the variable is set to`("other")
+    @Test(expected = ExpectationException::class)
+    fun `expecting an exception with a different type should result in a failed test`() {
+        given(::`variable scenario`) {
             `when this throws an exception`("username.already.taken")
-        }.run(RuntimeException::class)
+        }.runExpecting(RuntimeException::class)
     }
 
     @Test
-    fun `run with expectation succeeding run check`() {
-        given(::`test scenario`) {
-            `given the variable is set to`("other")
+    fun `testing something after expecting an exception should work`() {
+        given(::`variable scenario`) {
+            `when the variable is set to`("other")
             `when this throws an exception`("username.already.taken")
-        }.run(SpecialException::class) {
+        }.runExpecting(ExpectationException::class) {
             `then the variable matches`("other")
         }
     }
 
     @Test(expected = AssertionError::class)
-    fun `run with expectation and failing run check`() {
-        given(::`test scenario`) {
-            `given the variable is set to`("other")
+    fun `testing something after expecting an exception should result in a failed test`() {
+        given(::`variable scenario`) {
+            `when the variable is set to`("other")
             `when this throws an exception`("username.already.taken")
-        }.run(SpecialException::class) {
+        }.runExpecting(ExpectationException::class) {
             `then the variable matches`("this")
         }
     }

@@ -32,6 +32,8 @@ class OrganizationMemberCreatingTest : BasicTest() {
                 organizationId = UUID.randomUUID(),
                 role = Role.EMPLOYEE
             )
-        }.run(AssertionError::class)
+        }.runExpecting(AssertionError::class) {
+            `then an assertion has the message`(it,"organization.error.doesNotExist")
+        }
     }
 }

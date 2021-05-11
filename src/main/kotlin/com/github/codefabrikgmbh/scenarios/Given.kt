@@ -16,11 +16,11 @@ class ScenarioRunner<T : Scenario>(
     private val executeSteps: T.() -> Unit
 ) {
     fun run() {
-        run<Unit>(null)
+        runExpecting<Unit>(null)
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun <K : Any> run(expected: KClass<K>?, runSteps: T.(K) -> Unit = {}) {
+    fun <K : Any> runExpecting(expected: KClass<K>?, runSteps: T.(K) -> Unit = {}) {
         val scenarioResult = runCatching(scenarioSupplier)
         scenarioResult.onFailure {
             afterScenario()
