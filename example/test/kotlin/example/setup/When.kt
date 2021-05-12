@@ -2,6 +2,8 @@ package example.setup
 
 import com.github.codefabrikgmbh.scenarios.Scenario
 import example.domain.organizationmember.Role
+import org.junit.Assert
+import java.lang.AssertionError
 import java.time.LocalDate
 import java.util.*
 
@@ -16,6 +18,11 @@ fun Scenario.`when the admin creates an organization member with organization`(
 ) {
     TestApplication.organizationMemberService.create(employeeName, organizationId, role)
 }
+
+fun Scenario.`then an assertion has the message`(e: AssertionError, value: String) {
+    Assert.assertEquals(value, e.message)
+}
+
 
 fun `test organization`.`when the admin creates an organization member`(organizationMemberName: String, role: Role) {
     TestApplication.organizationMemberService.create(organizationMemberName, testOrganization.id, role)

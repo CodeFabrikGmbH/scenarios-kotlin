@@ -13,6 +13,6 @@ class OrganizationCreatingTest : BasicTest() {
         given(::Scenario) {
             `when the admin creates an organization`("Test")
             `then the organization list should contain an organization`("Test")
-        }
+        }.run()
     }
 }
