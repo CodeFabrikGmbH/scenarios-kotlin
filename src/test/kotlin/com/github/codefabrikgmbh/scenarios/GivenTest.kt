@@ -72,25 +72,25 @@ class GivenTest {
     @Test(expected = ExpectationException::class)
     fun `expecting an exception with a different type should result in a failed test`() {
         given(::`variable scenario`) {
-            `when this throws an exception`("username.already.taken")
+            `when this throws an exception`()
         }.runExpecting(RuntimeException::class)
     }
 
     @Test
-    fun `testing something after expecting an exception should work`() {
+    fun `asserting a valid value after expecting an exception should work`() {
         given(::`variable scenario`) {
             `when the variable is set to`("other")
-            `when this throws an exception`("username.already.taken")
+            `when this throws an exception`()
         }.runExpecting(ExpectationException::class) {
             `then the variable matches`("other")
         }
     }
 
     @Test(expected = AssertionError::class)
-    fun `testing something after expecting an exception should result in a failed test`() {
+    fun `asserting an invalid value after expecting an exception should result in a failed test`() {
         given(::`variable scenario`) {
             `when the variable is set to`("other")
-            `when this throws an exception`("username.already.taken")
+            `when this throws an exception`()
         }.runExpecting(ExpectationException::class) {
             `then the variable matches`("this")
         }

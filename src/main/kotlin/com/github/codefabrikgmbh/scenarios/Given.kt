@@ -33,19 +33,22 @@ class ScenarioRunner<T : Scenario>(
             afterScenario()
             executionResult.onFailure { throw it }
         } else {
-            val exception = executionResult.exceptionOrNull() ?: throw AssertionError("Expected error $expected has not been thrown.")
-            val expectationResult = scenarioResult.mapCatching { expectationSteps(it, exception as K) }
-
-            afterScenario()
-
             executionResult.onSuccess {
+                afterScenario()
                 throw AssertionError("Expected error $expected has not been thrown.")
             }
-            executionResult.onFailure {
-                if (it::class != expected) throw it
-            }
 
-            expectationResult.onFailure { throw it }
+            executionResult.onFailure { exception ->
+                if (exception::class != expected) {
+                    afterScenario()
+                    throw exception
+                }
+
+                val expectationResult = scenarioResult.mapCatching { expectationSteps(it, exception as K) }
+
+                afterScenario()
+                expectationResult.onFailure { throw it }
+            }
         }
     }
 }
