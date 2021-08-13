@@ -12,7 +12,7 @@ fun `creating an employee should work`() {
     given(::`test organization`) {
         `when the admin creates an organization member`("Test Employee", Role.EMPLOYEE)
         `then an organization member should exist`("Test Employee", Role.EMPLOYEE)
-    }
+    }.run()
 }
 ```
 
